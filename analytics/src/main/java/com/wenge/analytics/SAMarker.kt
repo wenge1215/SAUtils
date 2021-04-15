@@ -119,18 +119,18 @@ object SAMarker {
      */
     @JvmStatic
     fun trackInstallation(
-        download_channel: String,
-        download_appname: String,
-        download_appstore: String,
-        search: String
+        download_channel: String?,
+        download_appname: String?,
+        download_appstore: String?,
+        search: String?
     ) {
         try {
             val properties = JSONObject()
             //这里的 DownloadChannel 负责记录下载商店的渠道，值应传入具体应用商店包的标记。如果没有为不同商店打多渠道包，则可以忽略该属性的代码示例。
-            properties.put("download_channel", download_channel)
+            properties.put("download_channel", "$download_channel")
             properties.put("channel_source", "app")
-            properties.put("download_appname", download_appname)
-            properties.put("download_appstore", download_appstore)
+            properties.put("download_appname", "$download_appname")
+            properties.put("download_appstore", "$download_appstore")
             properties.put("search", search)
             // 触发激活事件
             SensorsDataAPI.sharedInstance().trackInstallation("AppInstall", properties)
